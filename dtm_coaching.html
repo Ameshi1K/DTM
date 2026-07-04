@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DTM COACHING | E-learning Mentorship</title>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+  :root{
+    --cream:#fbf3e3;
+    --paper:#fffdf8;
+    --espresso:#2a190d;
+    --cocoa:#5b4530;
+    --cocoa-soft:#7a5f45;
+    --bronze:#8a5323;
+    --gold:#c6902f;
+    --champagne:#f0ce85;
+    --line: rgba(120,76,29,0.16);
+    --ember:#a63a1e;
+    --shadow: rgba(74,46,15,0.16);
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; font-family:"Inter","Segoe UI",Arial,sans-serif; }
+  html{ scroll-behavior:smooth; overflow-x:hidden; width:100%; }
+
+  body{
+    background:
+      radial-gradient(circle at 10% 0%, rgba(255,215,137,0.35), transparent 28%),
+      radial-gradient(circle at 90% 8%, rgba(194,116,39,0.16), transparent 26%),
+      linear-gradient(180deg, #fff7ea 0%, #f6ead7 45%, #f9f1e5 100%);
+    color:var(--espresso);
+    line-height:1.6;
+    overflow-x:hidden;
+    max-width:480px;
+    margin:0 auto;
+    min-height:100vh;
+    box-shadow:0 0 70px rgba(70,42,12,0.10);
+    padding-bottom:92px; /* room for sticky buy bar */
+  }
+
+  a{ text-decoration:none; color:inherit; }
+  .container{ width:91%; margin:auto; }
+
+  /* ---------- HEADER ---------- */
+  header{
+    background:rgba(255,247,234,0.9);
+    backdrop-filter:blur(18px);
+    position:sticky; top:0; z-index:20;
+    border-bottom:1px solid var(--line);
+  }
+  .nav{ padding:14px 0; display:flex; justify-content:space-between; align-items:center; }
+  .logo{ font-family:"Fraunces",serif; font-size:16px; font-weight:700; color:var(--espresso); letter-spacing:0.5px; }
+  .logo span{ color:var(--bronze); }
+  .nav-right{ display:flex; align-items:center; gap:10px; }
+  .nav-price{ font-weight:800; font-size:13px; color:var(--bronze); }
+  .nav-btn{
+    background:linear-gradient(135deg,#7c4a19,#c78935,#f1cf8a);
+    color:#fff7e6; padding:9px 15px; border-radius:999px;
+    font-weight:800; font-size:13px; box-shadow:0 12px 25px rgba(124,74,25,0.25);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{ padding:36px 0 24px; position:relative; }
+  .hero::before{
+    content:""; position:absolute; width:330px; height:330px; border-radius:50%;
+    right:-190px; top:-80px; background:rgba(199,137,53,0.18); z-index:-1;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(255,255,255,0.72); color:#8a541f;
+    border:1px solid rgba(138,84,31,0.2); padding:7px 13px; border-radius:999px;
+    font-size:11.5px; font-weight:800; letter-spacing:0.6px; text-transform:uppercase;
+    margin-bottom:16px; box-shadow:0 14px 32px rgba(87,60,22,0.08);
+  }
+  h1{
+    font-family:"Fraunces",serif; font-size:33px; line-height:1.08;
+    letter-spacing:-0.8px; margin-bottom:14px; color:var(--espresso); font-weight:700;
+  }
+  .gold-text{
+    background:linear-gradient(135deg,#774114,#bd7b2d,#e5b968);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  .lede{ color:var(--cocoa); font-size:15px; margin-bottom:18px; }
+  .quote-line{
+    padding:14px 15px; border-left:4px solid var(--bronze);
+    background:rgba(255,255,255,0.54); border-radius:0 16px 16px 0;
+    color:#55351f; font-weight:600; font-style:italic; font-size:14px;
+    box-shadow:0 16px 38px rgba(76,44,15,0.07);
+  }
+
+  /* ---------- CHECKOUT / PRICE CARD (moved to top) ---------- */
+  .checkout-wrap{ padding:26px 0 6px; }
+  .price-card{
+    background:
+      radial-gradient(circle at top right, rgba(241,207,138,0.35), transparent 34%),
+      var(--paper);
+    border:1px solid var(--line); border-radius:28px; padding:18px;
+    box-shadow:0 28px 75px rgba(84,54,16,0.18); overflow:hidden;
+  }
+  .video-box{
+    overflow:hidden; border-radius:20px; position:relative;
+    background:
+      linear-gradient(135deg, rgba(55,30,13,0.88), rgba(139,82,28,0.8)),
+      url("course-poster.jpg");
+    background-size:cover; background-position:center;
+    border:1px solid rgba(180,122,32,0.2);
+    box-shadow:0 22px 45px rgba(63,41,13,0.17);
+    margin-bottom:16px;
+  }
+  .video-box .video-tag{
+    position:absolute; top:12px; left:12px; z-index:2;
+    background:rgba(20,12,5,0.55); color:#f4e2ba; backdrop-filter:blur(4px);
+    font-size:11px; font-weight:800; letter-spacing:0.4px; text-transform:uppercase;
+    padding:5px 10px; border-radius:999px; pointer-events:none;
+  }
+  .video-box video{ display:block; width:100%; aspect-ratio:16/9; background:#241b12; object-fit:cover; position:relative; }
+
+  .price-row{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:2px; }
+  .small-label{ color:var(--cocoa-soft); font-size:13px; font-weight:800; text-transform:uppercase; letter-spacing:0.4px; }
+  .price{ font-family:"Fraunces",serif; font-size:42px; font-weight:700; letter-spacing:-1.5px; color:var(--espresso); }
+  .price-sub{ color:var(--cocoa-soft); font-size:13px; font-weight:600; margin-bottom:14px; }
+
+  .btn-primary, .btn-secondary{
+    display:block; width:100%; padding:16px; border-radius:16px; text-align:center;
+    font-weight:800; border:none; cursor:pointer; font-size:15px;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg,#744111,#b77326,#f1cf8a);
+    color:#fff7e7; box-shadow:0 18px 38px rgba(124,74,25,0.27);
+  }
+  .btn-secondary{
+    margin-top:10px; background:rgba(255,255,255,0.74); color:#382315;
+    border:1px solid rgba(121,76,29,0.16);
+  }
+
+  /* itemized receipt */
+  .receipt{ margin-top:18px; padding-top:14px; border-top:1px dashed var(--line); }
+  .receipt-item{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:8px 0; font-size:14px; color:var(--cocoa);
+  }
+  .receipt-item b{ color:var(--espresso); font-weight:800; }
+  .check-ico{
+    display:inline-flex; width:16px; height:16px; border-radius:50%;
+    background:var(--gold); color:#fff; align-items:center; justify-content:center;
+    font-size:10px; font-weight:900; margin-right:9px; flex:0 0 auto;
+  }
+  .receipt-item .left{ display:flex; align-items:center; }
+
+  .trust-row{
+    display:flex; align-items:center; justify-content:center; gap:14px;
+    margin-top:16px; padding-top:14px; border-top:1px solid var(--line);
+    font-size:11.5px; color:var(--cocoa-soft); font-weight:700; text-align:center;
+  }
+  .trust-row span{ flex:1; }
+
+  /* ---------- STATS ---------- */
+  .stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:22px; }
+  .stat{
+    background:rgba(255,255,255,0.68); border:1px solid var(--line); border-radius:18px;
+    padding:13px 8px; box-shadow:0 16px 34px rgba(80,55,20,0.08); text-align:center;
+  }
+  .stat strong{ display:block; font-family:"Fraunces",serif; font-size:22px; line-height:1; color:var(--bronze); margin-bottom:4px; }
+  .stat p{ font-size:11px; color:var(--cocoa-soft); font-weight:700; }
+
+  /* ---------- GENERIC SECTIONS ---------- */
+  section{ padding:38px 0; }
+  .eyebrow-sm{
+    display:inline-block; font-size:11.5px; font-weight:800; letter-spacing:0.6px;
+    text-transform:uppercase; color:var(--bronze); margin-bottom:8px;
+  }
+  h2{
+    font-family:"Fraunces",serif; font-size:26px; line-height:1.14; letter-spacing:-0.5px;
+    margin-bottom:12px; color:var(--espresso); font-weight:700;
+  }
+  .section-text{ color:var(--cocoa); margin-bottom:22px; font-size:15px; }
+
+  /* ---------- CURRICULUM TIMELINE (signature element) ---------- */
+  .syllabus{ position:relative; padding-left:30px; }
+  .syllabus::before{
+    content:""; position:absolute; left:11px; top:6px; bottom:6px; width:1px;
+    background:linear-gradient(180deg, var(--gold), rgba(198,144,47,0.15));
+  }
+  .module{ position:relative; margin-bottom:22px; }
+  .module:last-child{ margin-bottom:0; }
+  .module::before{
+    content:""; position:absolute; left:-30px; top:4px; width:23px; height:23px;
+    border-radius:50%; background:var(--paper); border:2px solid var(--gold);
+  }
+  .module::after{
+    content:attr(data-n); position:absolute; left:-30px; top:4px; width:23px; height:23px;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:11px; font-weight:800; color:var(--bronze);
+  }
+  .module-head{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:4px; gap:8px; }
+  .module-head h3{ font-family:"Fraunces",serif; font-size:18px; color:var(--espresso); font-weight:700; }
+  .module-chip{
+    flex:0 0 auto; font-size:11px; font-weight:800; color:var(--bronze);
+    background:rgba(198,144,47,0.14); padding:4px 9px; border-radius:999px; white-space:nowrap;
+  }
+  .module p{ color:var(--cocoa); font-size:14.5px; }
+
+  /* ---------- FIT LIST (voor wie) ---------- */
+  .fit-grid{ display:grid; gap:12px; }
+  .fit-card{
+    background:rgba(255,253,248,0.78); border:1px solid var(--line); border-radius:22px;
+    padding:18px; box-shadow:0 16px 40px rgba(72,50,22,0.07);
+  }
+  .fit-card h4{ font-size:14px; font-weight:800; margin-bottom:10px; color:var(--espresso); }
+  .fit-card.yes h4{ color:#5f7a34; }
+  .fit-card.no h4{ color:var(--ember); }
+  .fit-card ul{ list-style:none; }
+  .fit-card li{ font-size:14px; color:var(--cocoa); margin-bottom:8px; padding-left:20px; position:relative; }
+  .fit-card.yes li::before{ content:"✓"; color:#5f7a34; font-weight:900; position:absolute; left:0; }
+  .fit-card.no li::before{ content:"✕"; color:var(--ember); font-weight:900; position:absolute; left:0; }
+
+  /* ---------- COACH ---------- */
+  .coach{
+    background:
+      radial-gradient(circle at top left, rgba(241,207,138,0.31), transparent 35%),
+      linear-gradient(135deg, rgba(255,255,255,0.82), rgba(255,244,222,0.86));
+    border:1px solid rgba(180,122,32,0.18); border-radius:28px; padding:22px;
+    box-shadow:0 24px 58px rgba(83,55,18,0.12);
+  }
+  .coach-top{ display:flex; align-items:center; gap:14px; margin-bottom:14px; }
+  .coach-avatar{
+    width:56px; height:56px; border-radius:50%; flex:0 0 auto;
+    background:linear-gradient(135deg,#744111,#e5b968); color:#fff7e7;
+    display:flex; align-items:center; justify-content:center;
+    font-family:"Fraunces",serif; font-weight:700; font-size:20px;
+  }
+  .coach-name{ font-family:"Fraunces",serif; font-size:21px; font-weight:700; color:var(--espresso); letter-spacing:-0.3px; }
+  .coach-role{ color:var(--bronze); font-weight:800; font-size:13px; }
+  .coach ul{ list-style:none; margin-top:14px; }
+  .coach li{ margin-bottom:10px; color:var(--cocoa); font-size:14.5px; padding-left:22px; position:relative; }
+  .coach li::before{ content:"✓"; color:var(--gold); font-weight:900; position:absolute; left:0; }
+
+  /* ---------- REVIEWS ---------- */
+  .google-score{
+    background:rgba(255,255,255,0.76); border:1px solid var(--line); border-radius:20px;
+    padding:14px; box-shadow:0 16px 36px rgba(72,50,22,0.07); margin-bottom:18px;
+    display:inline-flex; align-items:center; gap:10px;
+  }
+  .google-score strong{ font-family:"Fraunces",serif; font-size:24px; color:var(--espresso); line-height:1; }
+  .stars{ color:#f0a500; letter-spacing:1px; font-size:13px; }
+  .reviews{ display:grid; gap:13px; }
+  .review-card{
+    background:rgba(255,255,255,0.78); border:1px solid var(--line); border-radius:22px;
+    padding:17px; box-shadow:0 16px 40px rgba(72,50,22,0.07);
+  }
+  .review-top{ display:flex; align-items:center; gap:11px; margin-bottom:9px; }
+  .avatar{
+    width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,#744111,#e5b968);
+    color:#fff7e7; display:flex; align-items:center; justify-content:center; font-weight:800; flex:0 0 auto; font-size:14px;
+  }
+  .review-name{ font-weight:800; color:var(--espresso); line-height:1.15; font-size:14.5px; }
+  .review-date{ color:#8b745f; font-size:12.5px; }
+  .review-card p{ color:#5f4734; font-size:14.5px; margin-top:2px; }
+
+  /* ---------- FAQ (accordion) ---------- */
+  .faq-item{
+    background:rgba(255,253,248,0.78); border:1px solid var(--line); border-radius:18px;
+    padding:4px 16px; margin-bottom:10px;
+  }
+  .faq-item summary{
+    list-style:none; cursor:pointer; padding:14px 0; font-weight:800; font-size:15px;
+    color:var(--espresso); display:flex; justify-content:space-between; align-items:center; gap:10px;
+  }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-item summary::after{ content:"+"; font-size:20px; color:var(--bronze); transition:transform .2s; }
+  .faq-item[open] summary::after{ transform:rotate(45deg); }
+  .faq-item p{ color:var(--cocoa); font-size:14.5px; padding-bottom:14px; }
+
+  /* ---------- FINAL CTA ---------- */
+  .final-cta{
+    background:
+      radial-gradient(circle at top right, rgba(241,207,138,0.35), transparent 35%),
+      linear-gradient(135deg, rgba(255,255,255,0.84), rgba(255,239,208,0.87));
+    border:1px solid rgba(180,122,32,0.18); border-radius:30px; padding:24px;
+    box-shadow:0 24px 62px rgba(84,54,16,0.14); text-align:center;
+  }
+  .final-cta h2{ margin-bottom:8px; }
+  .final-cta .price{ font-size:34px; margin:10px 0 16px; }
+
+  footer{
+    padding:26px 0 20px; text-align:center; color:#7b6654; font-size:13px;
+    border-top:1px solid var(--line); background:rgba(255,247,234,0.78);
+  }
+
+  /* ---------- STICKY BUY BAR ---------- */
+  .sticky-bar{
+    position:fixed; left:50%; transform:translateX(-50%) translateY(120%);
+    bottom:0; width:100%; max-width:480px; z-index:30;
+    background:rgba(255,250,240,0.92); backdrop-filter:blur(14px);
+    border-top:1px solid var(--line); padding:12px 5%;
+    box-shadow:0 -12px 30px rgba(70,42,12,0.14);
+    display:flex; align-items:center; gap:12px;
+    transition:transform .35s ease;
+  }
+  .sticky-bar.show{ transform:translateX(-50%) translateY(0); }
+  .sticky-bar .info{ flex:1; min-width:0; }
+  .sticky-bar .info .lbl{ font-size:10.5px; color:var(--cocoa-soft); font-weight:700; text-transform:uppercase; }
+  .sticky-bar .info .amt{ font-family:"Fraunces",serif; font-size:20px; font-weight:700; color:var(--espresso); }
+  .sticky-bar .btn-primary{ flex:0 0 auto; width:auto; padding:13px 22px; font-size:14px; }
+</style>
+</head>
+
+<body>
+
+  <header>
+    <div class="container nav">
+      <div class="logo">DTM <span>COACHING</span></div>
+      <div class="nav-right">
+        <span class="nav-price">€117</span>
+        <a href="#checkout" class="nav-btn">Start nu</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="container">
+        <span class="eyebrow">E-learning · Mentorship · Mindset</span>
+        <h1>Jouw eerste stap naar meer <span class="gold-text">rust, focus en regie</span></h1>
+        <p class="lede">
+          Een warme, praktische mentorship-training van Romano Misiedjan — voor wie meer grip
+          wil op zijn denken, keuzes en gedrag.
+        </p>
+        <div class="quote-line">
+          "Meer rust begint niet buiten jezelf. Het begint bij hoe jij denkt, kiest en handelt."
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CHECKOUT: VIDEO + PRIJS BOVENAAN ================= -->
+    <section class="checkout-wrap" id="checkout">
+      <div class="container">
+        <div class="price-card" id="price-card">
+
+          <!-- Uitlegvideo: vervang video-uitleg.mp4 en course-poster.jpg met je eigen bestanden -->
+          <div class="video-box">
+            <span class="video-tag">▶ Bekijk de intro</span>
+            <video controls poster="course-poster.jpg">
+              <source src="video-uitleg.mp4" type="video/mp4" />
+              Je browser ondersteunt deze video niet.
+            </video>
+          </div>
+
+          <div class="price-row">
+            <span class="small-label">Volledige toegang</span>
+          </div>
+          <div class="price">€117,00</div>
+          <p class="price-sub">Eenmalige betaling — geen abonnement</p>
+
+          <a href="#" class="btn-primary">Koop de training</a>
+          <a href="#programma" class="btn-secondary">Bekijk het programma</a>
+
+          <div class="receipt">
+            <div class="receipt-item">
+              <span class="left"><span class="check-ico">✓</span>14 verdiepende videolessen</span>
+              <b>incl.</b>
+            </div>
+            <div class="receipt-item">
+              <span class="left"><span class="check-ico">✓</span>53 tekstuele lessen &amp; inzichten</span>
+              <b>incl.</b>
+            </div>
+            <div class="receipt-item">
+              <span class="left"><span class="check-ico">✓</span>Direct toegang na aankoop</span>
+              <b>incl.</b>
+            </div>
+            <div class="receipt-item">
+              <span class="left"><span class="check-ico">✓</span>Volledig gemaakt voor mobiel</span>
+              <b>incl.</b>
+            </div>
+          </div>
+
+          <div class="trust-row">
+            <span>🔒 Veilig betalen</span>
+            <span>⚡ Direct toegang</span>
+            <span>📱 Eigen tempo</span>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><strong>14</strong><p>Videolessen</p></div>
+          <div class="stat"><strong>53</strong><p>Tekstlessen</p></div>
+          <div class="stat"><strong>4.9</strong><p>Waardering</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PROGRAMMA / CURRICULUM ================= -->
+    <section id="programma">
+      <div class="container">
+        <span class="eyebrow-sm">Het programma</span>
+        <h2>Drie pijlers, stap voor stap</h2>
+        <p class="section-text">
+          Geen harde corporate praat, maar een opgebouwd traject dat je meeneemt van bewustwording
+          naar dagelijkse regie — verdeeld over 14 videolessen en 53 tekstuele lessen.
+        </p>
+
+        <div class="syllabus">
+          <div class="module" data-n="1">
+            <div class="module-head">
+              <h3>Rust</h3>
+              <span class="module-chip">Fundament</span>
+            </div>
+            <p>Leer hoe je minder vanuit stress reageert en meer vanuit overzicht en bewustzijn kiest.</p>
+          </div>
+
+          <div class="module" data-n="2">
+            <div class="module-head">
+              <h3>Focus</h3>
+              <span class="module-chip">Verdieping</span>
+            </div>
+            <p>Breng richting in je dagen en leer bewuster kiezen waar jouw energie naartoe gaat.</p>
+          </div>
+
+          <div class="module" data-n="3">
+            <div class="module-head">
+              <h3>Regie</h3>
+              <span class="module-chip">Toepassing</span>
+            </div>
+            <p>Neem controle terug over je gewoontes, gedachten en de stappen die je dagelijks zet.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VOOR WIE ================= -->
+    <section>
+      <div class="container">
+        <span class="eyebrow-sm">Is dit voor jou?</span>
+        <h2>Voor wie deze mentorship is gemaakt</h2>
+
+        <div class="fit-grid">
+          <div class="fit-card yes">
+            <h4>DIT IS VOOR JOU ALS...</h4>
+            <ul>
+              <li>Je merkt dat stress vaak de keuzes voor je maakt</li>
+              <li>Je klaar bent om echt aan je mindset te werken</li>
+              <li>Je liever in je eigen tempo leert, op je telefoon</li>
+            </ul>
+          </div>
+          <div class="fit-card no">
+            <h4>DIT IS NIET VOOR JOU ALS...</h4>
+            <ul>
+              <li>Je op zoek bent naar een snelle quick-fix</li>
+              <li>Je niet bereid bent om oefeningen echt te doen</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= COACH ================= -->
+    <section>
+      <div class="container">
+        <div class="coach">
+          <div class="coach-top">
+            <div class="coach-avatar">RM</div>
+            <div>
+              <div class="coach-name">Romano Misiedjan</div>
+              <div class="coach-role">Mindset Coach &amp; Mentor</div>
+            </div>
+          </div>
+          <p class="section-text" style="margin-bottom:0;">
+            Romano begeleidt mensen in persoonlijke groei, bewustwording en het doorbreken van oude
+            denkpatronen. Deze training voelt persoonlijk, duidelijk en direct toepasbaar.
+          </p>
+          <ul>
+            <li>Warm, eerlijk en praktisch uitgelegd</li>
+            <li>Gericht op groei van binnenuit</li>
+            <li>Voor iedereen die klaar is voor verandering</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= REVIEWS ================= -->
+    <section>
+      <div class="container">
+        <span class="eyebrow-sm">Ervaringen</span>
+        <h2>Wat deelnemers zeggen</h2>
+
+        <div class="google-score">
+          <strong>4.9</strong>
+          <div>
+            <div class="stars">★★★★★</div>
+            <p class="price-sub" style="margin:0;">Op basis van reviews</p>
+          </div>
+        </div>
+
+        <div class="reviews">
+          <div class="review-card">
+            <div class="review-top">
+              <div class="avatar">M</div>
+              <div>
+                <div class="review-name">Milan de Vries</div>
+                <div class="review-date">2 weken geleden</div>
+              </div>
+            </div>
+            <div class="stars">★★★★★</div>
+            <p>De lessen zijn rustig, duidelijk en niet gemaakt alsof je naar een zakelijke presentatie kijkt. Het voelt alsof iemand echt tegen je praat.</p>
+          </div>
+
+          <div class="review-card">
+            <div class="review-top">
+              <div class="avatar">S</div>
+              <div>
+                <div class="review-name">Sabrina K.</div>
+                <div class="review-date">1 maand geleden</div>
+              </div>
+            </div>
+            <div class="stars">★★★★★</div>
+            <p>Ik heb vooral veel gehad aan de stukken over discipline en rust in je hoofd. Praktisch en direct toepasbaar.</p>
+          </div>
+
+          <div class="review-card">
+            <div class="review-top">
+              <div class="avatar">R</div>
+              <div>
+                <div class="review-name">Rachid Amrani</div>
+                <div class="review-date">3 maanden geleden</div>
+              </div>
+            </div>
+            <div class="stars">★★★★★</div>
+            <p>Romano legt dingen uit op een manier die binnenkomt. Geen overdreven verkooppraat, maar lessen waar je echt over nadenkt.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section>
+      <div class="container">
+        <span class="eyebrow-sm">Vragen</span>
+        <h2>Veelgestelde vragen</h2>
+
+        <details class="faq-item">
+          <summary>Hoe krijg ik toegang?</summary>
+          <p>Na aankoop ontvang je direct toegang tot de online lessen.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Is dit geschikt voor beginners?</summary>
+          <p>Ja, de training is duidelijk opgebouwd en makkelijk te volgen, ook als je nog nooit met mindset-werk bezig bent geweest.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Kan ik de training op mobiel volgen?</summary>
+          <p>Ja, deze pagina en training zijn volledig gemaakt voor mobiel gebruik.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Hoe lang doe ik over de training?</summary>
+          <p>Je volgt de 14 videolessen en 53 tekstlessen volledig in je eigen tempo, zo vaak je wilt.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- ================= FINAL CTA ================= -->
+    <section>
+      <div class="container">
+        <div class="final-cta">
+          <span class="eyebrow-sm">Start vandaag</span>
+          <h2>Jouw eerste stap naar rust, focus en regie</h2>
+          <p class="section-text">
+            Krijg toegang tot 14 videolessen en 53 tekstuele lessen.
+          </p>
+          <div class="price">€117,00</div>
+          <a href="#price-card" class="btn-primary">Koop nu de training</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2026 DTM COACHING — Romano Misiedjan
+  </footer>
+
+  <!-- Sticky koopbalk: verschijnt zodra de prijs-kaart bovenaan uit beeld scrolt -->
+  <div class="sticky-bar" id="stickyBar">
+    <div class="info">
+      <div class="lbl">Volledige toegang</div>
+      <div class="amt">€117,00</div>
+    </div>
+    <a href="#price-card" class="btn-primary">Koop nu</a>
+  </div>
+
+  <script>
+    const bar = document.getElementById('stickyBar');
+    const priceCard = document.getElementById('price-card');
+    if (bar && priceCard && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            bar.classList.remove('show');
+          } else if (entry.boundingClientRect.top < 0) {
+            bar.classList.add('show');
+          }
+        });
+      }, { threshold: 0 });
+      io.observe(priceCard);
+    }
+  </script>
+
+</body>
+</html>
