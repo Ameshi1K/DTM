@@ -53,6 +53,14 @@
     padding:12px 26px; border-radius:2px; font-size:12.5px; font-weight:800;
     letter-spacing:1px; text-transform:uppercase;
   }
+  .burger{
+    display:none; flex-direction:column; justify-content:center; gap:5px;
+    background:none; border:none; padding:6px; cursor:pointer; z-index:60;
+  }
+  .burger span{ width:22px; height:2px; background:var(--cream); border-radius:2px; transition:transform .25s ease, opacity .2s ease; }
+  .burger.active span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  .burger.active span:nth-child(2){ opacity:0; }
+  .burger.active span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
 
   /* ---------- HERO ---------- */
   .hero{
@@ -244,6 +252,15 @@
     .nav-links{ display:none; }
     .logo{ font-size:19px; }
     .nav-cta{ padding:10px 18px; font-size:11px; }
+    .burger{ display:flex; }
+
+    .nav-links.mobile-open{
+      display:flex; flex-direction:column; position:fixed; top:60px; left:0; right:0;
+      background:rgba(12,11,9,0.98); backdrop-filter:blur(16px);
+      padding:24px 8% 30px; gap:22px; border-bottom:1px solid var(--line);
+      z-index:45;
+    }
+    .nav-links.mobile-open a{ font-size:15px; }
 
     /* Hero: exact photo height, directly followed by the gold bar - no gap */
     .hero{ min-height:0; height:auto; display:block; }
@@ -297,8 +314,11 @@
 
   <header>
     <div class="container nav">
+      <button class="burger" id="burgerBtn" aria-label="Menu openen" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
       <div class="logo">DTM <span>POWER UP</span></div>
-      <nav class="nav-links">
+      <nav class="nav-links" id="navLinks">
         <a href="#top" class="active">Homepage</a>
         <a href="dtm_coaching.html">E-learning</a>
         <a href="#">Basismodule</a>
@@ -497,6 +517,25 @@
       <a href="#">Blog</a>
     </div>
   </footer>
+
+  <script>
+    const burgerBtn = document.getElementById('burgerBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    burgerBtn.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('mobile-open');
+      burgerBtn.classList.toggle('active', isOpen);
+      burgerBtn.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('mobile-open');
+        burgerBtn.classList.remove('active');
+        burgerBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
 
 </body>
 </html>
