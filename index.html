@@ -69,6 +69,7 @@
     content:""; position:absolute; inset:0;
     background:radial-gradient(circle at 85% 30%, rgba(205,162,86,0.10), transparent 45%);
   }
+  .hero-mobile-img{ display:none; }
   .hero-inner{ position:relative; z-index:2; padding:60px 0; }
   .hero-kicker{
     display:inline-flex; align-items:center; gap:12px; color:var(--gold-bright);
@@ -243,28 +244,11 @@
     .logo{ font-size:19px; }
     .nav-cta{ padding:10px 18px; font-size:11px; }
 
-    /* Full-screen header: entire image visible, nothing cropped */
-    .hero{ min-height:100svh; height:100svh; align-items:flex-end; }
-    .hero-photo{
-      background-image:
-        url("https://files.catbox.moe/jq3e3q.png");
-      background-size:contain;
-      background-position:center top;
-      background-repeat:no-repeat;
-      background-color:var(--black);
-      filter:none;
-    }
-    .hero-photo::after{ display:none; }
-    .hero-inner{
-      width:100%; position:relative; z-index:2;
-      background:linear-gradient(180deg, transparent, rgba(12,11,9,0.92) 38%, var(--black) 100%);
-      padding:60px 0 46px;
-    }
-    .hero-kicker{ font-size:11px; letter-spacing:2.5px; margin-bottom:16px; }
-    .hero h1{ font-size:58px; max-width:100%; }
-    .hero-sub{ font-size:14.5px; max-width:100%; margin:20px 0 28px; }
-    .hero-ctas{ flex-wrap:wrap; gap:12px; }
-    .btn-gold, .btn-outline{ padding:14px 22px; font-size:12px; }
+    /* Hero: exact photo height, directly followed by the gold bar - no gap */
+    .hero{ min-height:0; height:auto; display:block; }
+    .hero-photo{ display:none; }
+    .hero-mobile-img{ display:block; width:100%; height:auto; }
+    .hero-inner{ display:none; }
     .hero-scroll{ display:none; }
 
     .marquee{ padding:12px 0; }
@@ -328,6 +312,7 @@
   <!-- ================= HERO ================= -->
   <section class="hero">
     <div class="hero-photo"></div>
+    <img class="hero-mobile-img" src="https://files.catbox.moe/jq3e3q.png" alt="DTM Power Up" />
     <div class="hero-scroll"><span class="line"></span></div>
   </section>
 
